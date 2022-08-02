@@ -1,6 +1,7 @@
 ﻿using DataAccess.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,8 @@ namespace DataAccess.Entities
         public string Description { get; set; }
         public int Temperature  { get; set; }
 
-        public ICollection<UserAuthEntity> Users { get; set; }
+        [ForeignKey("UserAuthEntityID")]
+        public UserAuthEntity UserAuthEntity { get; set; }
 
     }
 }
