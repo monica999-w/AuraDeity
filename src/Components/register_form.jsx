@@ -1,15 +1,21 @@
+import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
 
-const Register_form = ({onEmailChanged, onPasswordChanged, onSubmit}) => {
-    const navigate = useNavigate();
+const RegisterForm = ({
+                          onUsernameChanged, onPasswordChanged, onSubmit
+                      }) => {
 
-    return (<div className="Section_top">
+    const navigateTo = useNavigate();
+
+    return (<Fragment>
+        <div className="Section_top">
         <div className="content">
             <div className="text">Register</div>
             <form>
                 <div className="field">
                     <span className="fa fa-user"></span>
-                    <input type="text" onChange={onEmailChanged} placeholder="Email Id" required></input>
+                    <input type="text" onChange={onUsernameChanged} placeholder="Email Id" required></input>
 
                 </div>
 
@@ -27,6 +33,9 @@ const Register_form = ({onEmailChanged, onPasswordChanged, onSubmit}) => {
             </p>
 
         </div>
-    </div> );
+        </div>
+
+    </Fragment>);
 }
-export default Register_form;
+
+export default RegisterForm;

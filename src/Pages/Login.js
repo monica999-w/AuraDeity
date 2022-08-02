@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import LoginForm from "../Components/login_form";
 
 function Login() {
@@ -14,11 +14,13 @@ function Login() {
     }
 
     function onSubmit(data) {
-        login();
+        data.preventDefault();
+        tryToLogin();
     }
 
-    async function login() {
-        let [result] = await Promise.all([fetch("https://localhost:7152/api/auth/login", {
+    async function tryToLogin() {
+        const url = "https://localhost:7152/api/auth/login";
+        let result = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,17 +31,18 @@ function Login() {
                 password: password
             })
         }).then(async (response) => {
-            if (response.ok === false) {
-                return;
+            if(response.ok === true) {
+                const token = await response.json();
+                console.log("Ok!");
+            }  else {
+                console.log("Error!");
             }
-
-            const token = await response.json();
-        })]);
+        });
     }
 
     return (
         <LoginForm
-            onEmailChanged={onEmailChanged}
+            onUsernameChanged={onEmailChanged}
             onPasswordChanged={onPasswordChanged}
             onSubmit={onSubmit}
         />
@@ -47,4 +50,3 @@ function Login() {
 }
 
 export default Login;
-
